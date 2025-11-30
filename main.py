@@ -9,7 +9,7 @@ from PyQt6.QtGui import QIcon
 
 
 class Dobav(QDialog):
-    def __init__(self, fname, data):
+    def __init__(self, fname, data, row_chng=None, chnge=False):
         super().__init__()
         uic.loadUi('form.ui', self)
         self.setWindowIcon(QIcon('logo.png'))
@@ -18,7 +18,19 @@ class Dobav(QDialog):
         self.date.setDateTime(QDateTime.currentDateTime())
         self.name = fname
         self.data = data
+        self.chnge = chnge
+        self.row_chng = row_chng
         self.doba.clicked.connect(self.dobZap)
+        if self.chnge:
+            old_data = self.data.iloc[self.row_chng]
+            self.date.setDateTime(QDateTime.fromString(old_data['Дата']))
+            self.material.setText(old_data['Вид материала'])
+            self.size.setText(old_data['Размер катушки, вес кг.'])
+            self.doub.setValue(float(old_data['Сечение'].replace(',', '.')))
+            self.color.setText(old_data['Цвет'])
+            self.uslovia.setText(old_data['Условия хранения'])
+            # self.status.set(old_data['Статус'])
+            self.ostatok.setText(old_data['Остаток'])
 
     def dobZap(self):
         df2 = pd.DataFrame({"Дата": [self.date.text()],
@@ -29,7 +41,11 @@ class Dobav(QDialog):
                             "Условия хранения": [self.uslovia.text()],
                             "Статус": [self.status.currentText()],
                             "Остаток": [self.ostatok.text()]})
-        new_data = pd.concat([self.data, df2])
+        if self.chnge:
+            self.data.iloc[self.row_chng] = df2
+            new_data = self.data
+        else:
+            new_data = pd.concat([self.data, df2])
         new_data.to_excel(self.name, index=False)
         self.close()
 
@@ -45,14 +61,21 @@ class AccountingSystem(QMainWindow):
         self.horizontalHeader.setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
         self.horizontalHeader.sectionClicked.connect(self.header_clicked)
         self.dob.setEnabled(False)
+        self.obnov.setEnabled(False)
         self.dob.clicked.connect(self.dobav)
-        self.obnov.clicked.connect(self.Obnov)
+        self.obnov.clicked.connect(self.upd_date)
+        self.changedata.clicked.connect(self.dobav)
+        self.tableWidget.cellClicked.connect(self.cell_was_clicked)
+        self.row_chng = None
+
+    def cell_was_clicked(self, row, col):
+        self.row_chng = row
 
     def dobav(self):
-        self.w = Dobav(self.fname, self.data)
+        self.w = Dobav(self.fname, self.data, self.row_chng, self.sender() is self.changedata)
         self.w.show()
 
-    def Obnov(self):
+    def upd_date(self):
         self.data = pd.read_excel(self.fname)
         df = len(self.data["Дата"].index)
         headers = self.data.columns.values.tolist()
@@ -62,8 +85,6 @@ class AccountingSystem(QMainWindow):
             self.tableWidget.setRowCount(df)
             for j in range(self.tableWidget.columnCount()):
                 self.tableWidget.setItem(i, j, QTableWidgetItem(str(row[j])))
-
-
 
     def run(self):
         self.fname = QFileDialog.getOpenFileName(
@@ -77,6 +98,7 @@ class AccountingSystem(QMainWindow):
         self.statusbar.showMessage(f'Открыт файл {self.fname}')
         # добавить проверку на расширение файла
         self.dob.setEnabled(True)
+        self.obnov.setEnabled(True)
         self.data = pd.read_excel(self.fname)
         headers = self.data.columns.values.tolist()
         self.tableWidget.setColumnCount(len(headers))
