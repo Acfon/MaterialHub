@@ -13,7 +13,6 @@ class Dobav(QDialog):
         super().__init__()
         uic.loadUi('form.ui', self)
         self.setWindowIcon(QIcon('logo.png'))
-        self.setWindowTitle('Добавление нового материала')
         self.date.setCalendarPopup(True)
         self.date.setDateTime(QDateTime.currentDateTime())
         self.name = fname
@@ -21,12 +20,12 @@ class Dobav(QDialog):
         self.chnge = chnge
         self.row_chng = row_chng
         self.doba.clicked.connect(self.dobZap)
-        if self.chnge:
+        if self.chnge and self.row_chng:
             old_data = self.data.iloc[self.row_chng]
             self.date.setDateTime(QDateTime.fromString(old_data['Дата']))
             self.material.setText(old_data['Вид материала'])
             self.size.setText(old_data['Размер катушки, вес кг.'])
-            self.doub.setValue(float(old_data['Сечение'].replace(',', '.')))
+            self.doub.setValue(float(old_data['Сечение'][:4].replace(',', '.')))
             self.color.setText(old_data['Цвет'])
             self.uslovia.setText(old_data['Условия хранения'])
             # self.status.set(old_data['Статус'])
@@ -62,11 +61,13 @@ class AccountingSystem(QMainWindow):
         self.horizontalHeader.sectionClicked.connect(self.header_clicked)
         self.dob.setEnabled(False)
         self.obnov.setEnabled(False)
+        self.changedata.setEnabled(False)
         self.dob.clicked.connect(self.dobav)
         self.obnov.clicked.connect(self.upd_date)
         self.changedata.clicked.connect(self.dobav)
         self.tableWidget.cellClicked.connect(self.cell_was_clicked)
         self.row_chng = None
+        self.fname = None
 
     def cell_was_clicked(self, row, col):
         self.row_chng = row
@@ -96,9 +97,9 @@ class AccountingSystem(QMainWindow):
             self.statusbar.showMessage('Не выбран файл с данными')
             return
         self.statusbar.showMessage(f'Открыт файл {self.fname}')
-        # добавить проверку на расширение файла
         self.dob.setEnabled(True)
         self.obnov.setEnabled(True)
+        self.changedata.setEnabled(True)
         self.data = pd.read_excel(self.fname)
         headers = self.data.columns.values.tolist()
         self.tableWidget.setColumnCount(len(headers))
