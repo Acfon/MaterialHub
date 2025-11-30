@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>993</width>
+    <height>682</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>logo.png</normaloff>logo.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="5" column="1">
+       <widget class="QPushButton" name="export_2">
+        <property name="styleSheet">
+         <string notr="true"> QPushButton {   padding:4px;    color: #fff;   font-size: 14px;   border-radius: 2px; border: 1px solid #3873d9; background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,  stop: 0 #4287ff, stop: 1 #356ccc); }</string>
+        </property>
+        <property name="text">
+         <string>Экспорт/Сохранить</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="zagruz">
+        <property name="styleSheet">
+         <string notr="true"> QPushButton {   padding:4px;    color: #fff;   font-size: 14px;   border-radius: 2px; border: 1px solid #3873d9; background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,  stop: 0 #4287ff, stop: 1 #356ccc); }</string>
+        </property>
+        <property name="text">
+         <string>Импорт</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="nofilt">
+        <property name="styleSheet">
+         <string notr="true"> QPushButton {   padding:4px;    color: #fff;   font-size: 14px;   border-radius: 2px; border: 1px solid #3873d9; background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,  stop: 0 #4287ff, stop: 1 #356ccc); }</string>
+        </property>
+        <property name="text">
+         <string>Убрать фильтр</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="dob">
+        <property name="styleSheet">
+         <string notr="true"> QPushButton {   padding:4px;    color: #fff;   font-size: 14px;   border-radius: 2px; border: 1px solid #3873d9; background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,  stop: 0 #4287ff, stop: 1 #356ccc); }</string>
+        </property>
+        <property name="text">
+         <string>Добавить запись</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" rowspan="6">
+       <widget class="QTableWidget" name="tableWidget"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="obnov">
+        <property name="styleSheet">
+         <string notr="true"> QPushButton {   padding:4px;    color: #fff;   font-size: 14px;   border-radius: 2px; border: 1px solid #3873d9; background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,  stop: 0 #4287ff, stop: 1 #356ccc); }</string>
+        </property>
+        <property name="text">
+         <string>Обновить таблицу</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>481</width>
+    <height>255</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Дата</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>Остаток (кг)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Статус</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Материал</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Условия хранения</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Сечение (мм)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Размер катушки, вес кг</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Цвет</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="QPushButton" name="doba">
+       <property name="styleSheet">
+        <string notr="true"> QPushButton {   padding:4px;    color: #fff;   font-size: 14px;   border-radius: 2px; border: 1px solid #3873d9; background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,  stop: 0 #4287ff, stop: 1 #356ccc); }</string>
+       </property>
+       <property name="text">
+        <string>Добавить</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QPushButton" name="otm">
+       <property name="styleSheet">
+        <string notr="true"> QPushButton {   padding:4px;    color: #fff;   font-size: 14px;   border-radius: 2px; border: 1px solid #3873d9; background-color: qlineargradient( x1: 0, y1: 0, x2: 0, y2: 1,  stop: 0 #4287ff, stop: 1 #356ccc); }</string>
+       </property>
+       <property name="text">
+        <string>Отмена</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1" colspan="2">
+      <widget class="QLineEdit" name="ostatok"/>
+     </item>
+     <item row="7" column="1" colspan="2">
+      <widget class="QLineEdit" name="uslovia"/>
+     </item>
+     <item row="6" column="1" colspan="2">
+      <widget class="QLineEdit" name="color"/>
+     </item>
+     <item row="4" column="1" colspan="2">
+      <widget class="QDoubleSpinBox" name="doub">
+       <property name="decimals">
+        <number>5</number>
+       </property>
+       <property name="maximum">
+        <double>100000001.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="2">
+      <widget class="QLineEdit" name="size"/>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QLineEdit" name="material"/>
+     </item>
+     <item row="0" column="1" colspan="2">
+      <widget class="QDateTimeEdit" name="date">
+       <property name="displayFormat">
+        <string>dd.MM.yyyy H:mm:ss</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1" colspan="2">
+      <widget class="QComboBox" name="status">
+       <item>
+        <property name="text">
+         <string>Добавлен</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Используется</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Израсходован</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
