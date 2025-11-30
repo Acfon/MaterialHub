@@ -3,7 +3,7 @@ import pandas as pd
 
 from PyQt6 import uic
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QFileDialog, QTableWidgetItem, QHeaderView, QMenu, QDialog, \
-                             QListWidget, QScrollArea, QMessageBox, QVBoxLayout)
+                             QListWidget, QScrollArea)
 from PyQt6.QtCore import QSignalMapper, Qt, QDateTime
 from PyQt6.QtGui import QIcon
 
@@ -20,6 +20,7 @@ class Dobav(QDialog):
         self.chnge = chnge
         self.row_chng = row_chng
         self.doba.clicked.connect(self.dobZap)
+        self.otm.clicked.connect(self.close)
         if self.chnge and self.row_chng:
             old_data = self.data.iloc[self.row_chng]
             self.date.setDateTime(QDateTime.fromString(old_data['Дата']))
@@ -28,7 +29,8 @@ class Dobav(QDialog):
             self.doub.setValue(float(old_data['Сечение'][:4].replace(',', '.')))
             self.color.setText(old_data['Цвет'])
             self.uslovia.setText(old_data['Условия хранения'])
-            # self.status.set(old_data['Статус'])
+            i = self.status.findText(old_data['Статус'])
+            self.status.setCurrentIndex(i)
             self.ostatok.setText(old_data['Остаток'])
 
     def dobZap(self):
@@ -47,6 +49,7 @@ class Dobav(QDialog):
             new_data = pd.concat([self.data, df2])
         new_data.to_excel(self.name, index=False)
         self.close()
+
 
 
 class AccountingSystem(QMainWindow):
